@@ -50,7 +50,7 @@
 //     const selectedColorsContainer = document.querySelector('.selected-colors');
 //     const cartEmptyMessage = document.querySelector('.cart-empty');
 //     const checkoutButton = document.querySelector('.checkout-button');
-  
+
 //     colors.forEach(color => {
 //       color.addEventListener('click', () => {
 //         if (selectedColorsContainer.children.length <= 3) {
@@ -79,7 +79,7 @@
 //         }
 //       });
 //     });
-  
+
 //     checkoutButton.addEventListener('click', () => {
 //       const selectedColors = [];
 //       selectedColorsContainer.querySelectorAll('.selected-color').forEach(color => {
@@ -90,53 +90,106 @@
 //     });
 //   });
 
+// document.addEventListener('DOMContentLoaded', () => {
+//     const colors = document.querySelectorAll('.color');
+//     const selectedColorsContainer = document.querySelector('.selected-colors');
+//     const cartEmptyMessage = document.querySelector('.cart-empty');
+//     const checkoutButton = document.querySelector('.checkout-button');
 
-document.addEventListener('DOMContentLoaded', () => {
-    const colors = document.querySelectorAll('.color');
-    const selectedColorsContainer = document.querySelector('.selected-colors');
-    const cartEmptyMessage = document.querySelector('.cart-empty');
-    const checkoutButton = document.querySelector('.checkout-button');
+//     colors.forEach(color => {
+//         color.addEventListener('click', () => {
+//             if (selectedColorsContainer.children.length <= 3) {
+//                 if (!color.classList.contains('disabled')) {
+//                     const selectedColor = document.createElement('div');
+//                     selectedColor.classList.add('selected-color');
+//                     selectedColor.style.backgroundColor = color.style.backgroundColor;
 
-    colors.forEach(color => {
-        color.addEventListener('click', () => {
-            if (selectedColorsContainer.children.length <= 3) {
-                if (!color.classList.contains('disabled')) {
-                    const selectedColor = document.createElement('div');
-                    selectedColor.classList.add('selected-color');
-                    selectedColor.style.backgroundColor = color.style.backgroundColor;
+//                     const colorName = document.createElement('span');
+//                     colorName.textContent = color.dataset.colorName;
+//                     selectedColor.appendChild(colorName);
 
-                    const colorName = document.createElement('span');
-                    colorName.textContent = color.dataset.colorName;
-                    selectedColor.appendChild(colorName);
+//                     selectedColor.addEventListener('click', () => {
+//                         selectedColorsContainer.removeChild(selectedColor);
+//                         color.classList.remove('disabled');
+//                         if (selectedColorsContainer.children.length === 0) {
+//                             cartEmptyMessage.style.display = 'block';
+//                             checkoutButton.style.display = 'none';
+//                         }
+//                         checkoutButton.disabled = selectedColorsContainer.children.length === 0;
+//                     });
 
-                    selectedColor.addEventListener('click', () => {
-                        selectedColorsContainer.removeChild(selectedColor);
-                        color.classList.remove('disabled');
-                        if (selectedColorsContainer.children.length === 0) {
-                            cartEmptyMessage.style.display = 'block';
-                            checkoutButton.style.display = 'none';
-                        }
-                        checkoutButton.disabled = selectedColorsContainer.children.length === 0;
-                    });
+//                     selectedColorsContainer.appendChild(selectedColor);
+//                     cartEmptyMessage.style.display = 'none';
+//                     color.classList.add('disabled');
+//                     checkoutButton.style.display = 'block';
+//                     checkoutButton.disabled = selectedColorsContainer.children.length === 0;
+//                 }
+//             } else {
+//                 alert('You can select a maximum of 3 colors.');
+//             }
+//         });
+//     });
 
-                    selectedColorsContainer.appendChild(selectedColor);
-                    cartEmptyMessage.style.display = 'none';
-                    color.classList.add('disabled');
-                    checkoutButton.style.display = 'block';
-                    checkoutButton.disabled = selectedColorsContainer.children.length === 0;
-                }
-            } else {
-                alert('You can select a maximum of 3 colors.');
+//     checkoutButton.addEventListener('click', () => {
+//         const selectedColors = [];
+//         selectedColorsContainer.querySelectorAll('.selected-color').forEach(color => {
+//             selectedColors.push(color.style.backgroundColor);
+//         });
+//         localStorage.setItem('selectedColors', JSON.stringify(selectedColors));
+//         window.location.href = 'checkout.html';
+//     });
+// });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const colors = document.querySelectorAll(".color");
+  const selectedColorsContainer = document.querySelector(".selected-colors");
+  const cartEmptyMessage = document.querySelector(".cart-empty");
+  const checkoutButton = document.querySelector(".checkout-button");
+
+  colors.forEach((color) => {
+    color.addEventListener("click", () => {
+      if (selectedColorsContainer.children.length <= 3) {
+        if (!color.classList.contains("disabled")) {
+          const selectedColor = document.createElement("div");
+          selectedColor.classList.add("selected-color");
+          selectedColor.style.backgroundColor = color.style.backgroundColor;
+
+          const colorName = document.createElement("span");
+          colorName.textContent = color.dataset.colorName;
+          selectedColor.appendChild(colorName);
+
+          selectedColor.addEventListener("click", () => {
+            selectedColorsContainer.removeChild(selectedColor);
+            color.classList.remove("disabled");
+            if (selectedColorsContainer.children.length === 0) {
+              cartEmptyMessage.style.display = "block";
+              checkoutButton.style.display = "none";
             }
-        });
-    });
+            checkoutButton.disabled =
+              selectedColorsContainer.children.length === 0;
+          });
 
-    checkoutButton.addEventListener('click', () => {
-        const selectedColors = [];
-        selectedColorsContainer.querySelectorAll('.selected-color').forEach(color => {
-            selectedColors.push(color.style.backgroundColor);
-        });
-        localStorage.setItem('selectedColors', JSON.stringify(selectedColors));
-        window.location.href = 'checkout.html';
+          selectedColorsContainer.appendChild(selectedColor);
+          cartEmptyMessage.style.display = "none";
+          color.classList.add("disabled");
+          checkoutButton.style.display = "block";
+          checkoutButton.disabled =
+            selectedColorsContainer.children.length === 0;
+        }
+      } else {
+        alert("You can select a maximum of 3 colors.");
+      }
     });
+  });
+
+  checkoutButton.addEventListener("click", () => {
+    const selectedColors = [];
+    selectedColorsContainer
+      .querySelectorAll(".selected-color")
+      .forEach((color) => {
+        selectedColors.push(color.style.backgroundColor);
+      });
+    localStorage.setItem("selectedColors", JSON.stringify(selectedColors));
+    window.location.href = "checkout.html";
+  });
 });
