@@ -1,90 +1,82 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Checkout</title>
     <style>
-      body {
-        font-family: Arial, sans-serif;
-      }
-      .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: 20px;
-      }
-      .selected-colors {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin: 20px 0;
-      }
-      .selected-color {
-        width: 100px;
-        height: 100px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        font-weight: bold;
-        color: #fff;
-        border-radius: 50%;
-      }
-      /* Define classes for colors */
-      .red {
-        background-color: #ff5252;
-      }
-      .blue {
-        background-color: #2196f3;
-      }
-      .orange {
-        background-color: #ff9800;
-      }
-      .pink {
-        background-color: #e91e63;
-      }
-      .green {
-        background-color: #4caf50;
-      }
-      .purple {
-        background-color: #9c27b0;
-      }
-      .yellow {
-        background-color: #ffeb3b;
-      }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+        }
+        .selected-colors {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .selected-color {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-weight: bold;
+            color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .selected-color span {
+            display: none;
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 12px;
+            text-shadow: none;
+        }
+        .selected-color:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .selected-color:hover span {
+            display: block;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <div class="container">
-      <h1>Checkout</h1>
-      <div class="selected-colors"></div>
-      <button onclick="window.location.href='index.html'">
-        Back to Dashboard
-      </button>
+        <h1>Checkout</h1>
+        <div class="selected-colors"></div>
+        <button onclick="window.location.href='dashboard.html'">Back to Dashboard</button>
     </div>
-    <script>
-          // checkout-script.js
-
-      document.addEventListener('DOMContentLoaded', () => {
-          const selectedColors = JSON.parse(localStorage.getItem('selectedColors'));
-          const checkoutContainer = document.querySelector('.checkout-container');
-
-          if (selectedColors && selectedColors.length > 0) {
-              selectedColors.forEach(color => {
-                  const colorBox = document.createElement('div');
-                  colorBox.classList.add('color-box');
-                  colorBox.style.backgroundColor = color;
-                  checkoutContainer.appendChild(colorBox);
-              });
-          } else {
-              const noColorsMessage = document.createElement('div');
-              noColorsMessage.textContent = 'No colors selected';
-              checkoutContainer.appendChild(noColorsMessage);
-          }
-      });
-
-          });
-    </script>
-  </body>
+    <script src="/Scripts/checkout.js"></script>
+</body>
+</body>
 </html>
