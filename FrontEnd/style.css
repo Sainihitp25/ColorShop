@@ -104,10 +104,11 @@ header {
     font-weight: bold;
     color: #fff;
     border-radius : 10px;
-    border: 1px solid black; /* Adjust as needed */
+    //border: 1px solid black; /* Adjust as needed */
     transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
     background-color: #ccc;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
+    box-shadow: 0 0 3px black;
     margin-bottom: 10px;
 }
 
@@ -179,6 +180,7 @@ header {
     gap: 10px;
     align-items: center;
     justify-content: center;
+    
 }
 
 .selected-color {
