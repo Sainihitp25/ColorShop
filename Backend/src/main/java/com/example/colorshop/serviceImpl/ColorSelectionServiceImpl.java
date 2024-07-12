@@ -49,18 +49,23 @@ public class ColorSelectionServiceImpl implements ColorSelectionServie {
     }
 
     @Override
-    public String selectColor(Integer userId, Integer colorId) {
+    public String selectColors1(Integer userId, List<String> selectedColors1) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
-        Optional<Color> color = colorRepository.findById(colorId);
-        if (color.isPresent()) {
-            ColorSelection userColorSelection1 = new ColorSelection();
-            userColorSelection1.setUser(user);
-            userColorSelection1.setColor(color.get());
-            colorSelectionRepository.save(userColorSelection1);
-            return "Colors are added to the cart successfully";
+
+        // Save the selection in the database
+        for (String color : selectedColors1) {
+            Optional<Color> color1 = colorRepository.findByName(color);
+            ColorSelection userColorSelection = new ColorSelection();
+            if (color1.isPresent()) {
+                userColorSelection.setUser(user);
+                userColorSelection.setColor(color1.get());
+                colorSelectionRepository.save(userColorSelection);
+            }
         }
-        return "Colors are not added to the cart successfully";
+        return "Colors added to the cart successfully";
     }
+
+
 }
 
