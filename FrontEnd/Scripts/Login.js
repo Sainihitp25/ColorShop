@@ -1,220 +1,82 @@
-// // // function validateLoginForm(event) {
-// // //   event.preventDefault();
+document.addEventListener("DOMContentLoaded", function () {
+  const loginForm = document.getElementById("loginForm");
 
-// // //   let isValid = true;
+  loginForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
 
-// // //   const email = document.getElementById("Email").value;
-// // //   const password = document.getElementById("password").value;
+    let isValid = true;
 
-// // //   console.log(email)
-// // //   console.log(password)
+    const email = document.getElementById("Email").value;
+    const password = document.getElementById("password").value;
 
-// // //   const emailError = document.getElementById("EmailError");
-// // //   const passwordError = document.getElementById("passwordError");
+    const emailError = document.getElementById("EmailError");
+    const passwordError = document.getElementById("passwordError");
 
-// // //   emailError.textContent = "";
-// // //   passwordError.textContent = "";
+    emailError.textContent = "";
+    passwordError.textContent = "";
 
+    if (!email) {
+      emailError.textContent = "Email is required";
+      isValid = false;
+    }
 
-// // //   if (!email) {
-// // //     emailError.textContent = "Email is required";
-// // //     isValid = false;
-// // //   }
+    if (!password) {
+      passwordError.textContent = "Password is required";
+      isValid = false;
+    }
 
-// // //   if (!password) {
-// // //     passwordError.textContent = "Password is required";
-// // //     isValid = false;
-// // //   }
+    if (isValid) {
+      try {
+        const response = await axios.post("http://localhost:9092/user/login", {
+          emailId: email,
+          password: password,
+        });
 
-// // // //   if (isValid) {
-// // // //     axios
-// // // //       .post("http://localhost:8080/login", {
-// // // //         email: email,
-// // // //         password: password,
-// // // //       })
-// // // //       .then((response) => {
-// // // //         console.log("Logged in successfully");
-// // // //         // Redirect to dashboard or another page after successful login
-// // // //       })
-// // // //       .catch((error) => {
-// // // //         console.error("There was an error logging in!", error);
-// // // //       });
-// // // //   }
+        if (response.status === 200) {
+          const token = response.data.token;
 
-// // //   return isValid;
-// // // }
+          localStorage.setItem("token", token);
+          localStorage.setItem("userName", response.data.username);
+          localStorage.setItem("userId", response.data.userId);
 
-
-
-// // document.addEventListener("DOMContentLoaded", function() {
-// //     const loginForm = document.getElementById("loginForm");
-
-// //     loginForm.addEventListener("submit", function(event) {
-// //         event.preventDefault();
-// //         console.log("Form submitted");
-
-// //         let isValid = true;
-
-// //         const email = document.getElementById("Email").value;
-// //         const password = document.getElementById("password").value;
-
-// //         console.log("Email:", email);
-// //         console.log("Password:", password);
-
-// //         const emailError = document.getElementById("EmailError");
-// //         const passwordError = document.getElementById("passwordError");
-
-// //         emailError.textContent = "";
-// //         passwordError.textContent = "";
-
-// //         if (!email) {
-// //             emailError.textContent = "Email is required";
-// //             isValid = false;
-// //         }
-
-// //         if (!password) {
-// //             passwordError.textContent = "Password is required";
-// //             isValid = false;
-// //         }
-
-// //         if (isValid) {
-// //             console.log("Form is valid");
-// //             // Add your Axios request here
-// //         } else {
-// //             console.log("Form is not valid");
-// //         }
-// //     });
-// // });
-
-
-// document.addEventListener("DOMContentLoaded", function() {
-//     const loginForm = document.getElementById("loginForm");
-
-//     loginForm.addEventListener("submit", function(event) {
-//         event.preventDefault();
-//         console.log("Form submitted");
-
-//         let isValid = true;
-
-//         const email = document.getElementById("Email").value;
-//         const password = document.getElementById("password").value;
-
-//         console.log("Email:", email);
-//         console.log("Password:", password);
-
-//         const emailError = document.getElementById("EmailError");
-//         const passwordError = document.getElementById("passwordError");
-
-//         emailError.textContent = "";
-//         passwordError.textContent = "";
-
-//         if (!email) {
-//             emailError.textContent = "Email is required";
-//             isValid = false;
-//         }
-
-//         if (!password) {
-//             passwordError.textContent = "Password is required";
-//             isValid = false;
-//         }
-
-//         if (isValid) {
-//             console.log("Form is valid");
-
-//             axios.post('/login', {
-//                 email: email,
-//                 password: password
-//             })
-//             .then(function (response) {
-//                 console.log("Response:", response);
-//                 // Handle successful login here, e.g., redirect to another page
-//             })
-//             .catch(function (error) {
-//                 console.log("Error:", error);
-//                 // Handle login error here, e.g., display an error message
-//                 if (error.response) {
-//                     // Server responded with a status other than 200 range
-//                     console.log("Server error:", error.response.data);
-//                 } else if (error.request) {
-//                     // Request was made but no response received
-//                     console.log("No response received:", error.request);
-//                 } else {
-//                     // Something happened in setting up the request
-//                     console.log("Axios error:", error.message);
-//                 }
-//             });
-//         } else {
-//             console.log("Form is not valid");
-//         }
-//     });
-// });
-
-
-document.addEventListener("DOMContentLoaded", function() {
-    const loginForm = document.getElementById("loginForm");
-
-    loginForm.addEventListener("submit", function(event) {
-        event.preventDefault();
-        console.log("Form submitted");
-
-        let isValid = true;
-
-        const email = document.getElementById("Email").value;
-        const password = document.getElementById("password").value;
-
-        console.log("Email:", email);
-        console.log("Password:", password);
-
-        const emailError = document.getElementById("EmailError");
-        const passwordError = document.getElementById("passwordError");
-
-        emailError.textContent = "";
-        passwordError.textContent = "";
-
-        if (!email) {
-            emailError.textContent = "Email is required";
-            isValid = false;
-        }
-
-        if (!password) {
-            passwordError.textContent = "Password is required";
-            isValid = false;
-        }
-
-        if (isValid) {
-            console.log("Form is valid");
-
-            window.location.href = '/dashboard.html'
-
-            // axios.post('/login', {
-            //     email: email,
-            //     password: password
-            // })
-            // .then(function (response) {
-            //     console.log("Response:", response);
-            //     if (response.status === 200) {
-            //         // Handle successful login
-            //         window.location.href = '/dashboard'; // Redirect to dashboard or another page
-            //     } else {
-            //         // Handle unexpected status codes
-            //         console.log("Unexpected response status:", response.status);
-            //     }
-            // })
-            // .catch(function (error) {
-            //     console.log("Error:", error);
-            //     if (error.response) {
-            //         // Server responded with a status other than 200 range
-            //         console.log("Server error:", error.response.data);
-            //     } else if (error.request) {
-            //         // Request was made but no response received
-            //         console.log("No response received:", error.request);
-            //     } else {
-            //         // Something happened in setting up the request
-            //         console.log("Axios error:", error.message);
-            //     }
-            // });
+          // SweetAlert for successful login
+          Swal.fire({
+            icon: 'success',
+            title: 'Login Successful',
+            text: 'Redirecting to dashboard...',
+            showConfirmButton: false,
+            timer: 2000
+          }).then(() => {
+            window.location.href = "/dashboard.html";
+          });
         } else {
-            console.log("Form is not valid");
+          console.log("Unexpected response status:", response.status);
+          Swal.fire({
+            icon: 'error',
+            title: 'Login Failed',
+            text: 'Invalid credentials',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK'
+          });
         }
-    });
+      } catch (error) {
+        console.log("Error:", error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Login Failed',
+          text: 'Invalid credentials',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'OK'
+        });
+
+        if (error.response) {
+          console.log("Server error:", error.response.data);
+        } else if (error.request) {
+          console.log("No response received:", error.request);
+        } else {
+          console.log("Axios error:", error.message);
+        }
+      }
+    }
+  });
 });
