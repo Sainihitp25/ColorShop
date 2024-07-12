@@ -3,10 +3,14 @@ package com.example.colorshop.controller;
 import com.example.colorshop.entity.Color;
 import com.example.colorshop.service.ColorSelectionServie;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/color-selection")
 public class ColorSelectionController {
@@ -15,15 +19,14 @@ public class ColorSelectionController {
     private ColorSelectionServie colorSelectionServie;
 
     @PostMapping("/colors/{userId}")
-    public String selectColors(@PathVariable Integer userId, @RequestBody List<Color> selectedColors) {
-        colorSelectionServie.selectColors(userId, selectedColors);
-        return "Colors added to the cart successfully";
-    }
-
-    @PostMapping("/{userId}/color/{colorId}")
-    public String selectColor(@PathVariable Integer userId, @PathVariable Integer colorId) {
-        return colorSelectionServie.selectColor(userId, colorId);
-
+    public ResponseEntity<String> selectColors(@PathVariable Integer userId, @RequestBody List<Color> selectedColors) {
+       try
+       {
+           colorSelectionServie.selectColors(userId, selectedColors);
+           return new ResponseEntity<>("Colors are added to the cart successfully", HttpStatus.ACCEPTED);
+       }catch (Exception e) {
+           return new ResponseEntity<>("Colors added to the cart successfully" + e.getMessage(), HttpStatus.BAD_REQUEST);
+       }
     }
 
 }

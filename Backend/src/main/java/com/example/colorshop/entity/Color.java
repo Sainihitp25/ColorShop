@@ -1,9 +1,6 @@
 package com.example.colorshop.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 
@@ -21,6 +18,9 @@ public class Color {
     private Integer colorId;
 
     private String colorName;
+
+    @Column()
+    private String ColorCode;
 
 
 }

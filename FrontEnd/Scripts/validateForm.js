@@ -99,7 +99,7 @@ function validateForm(event) {
         console.error("There was an error signing up!", error);
       });
   }
-
+  
   return isValid;
 }
 

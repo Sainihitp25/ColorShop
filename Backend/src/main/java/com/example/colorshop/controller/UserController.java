@@ -3,12 +3,11 @@ package com.example.colorshop.controller;
 import com.example.colorshop.entity.User;
 import com.example.colorshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -19,23 +18,24 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<User> registerUser(@RequestBody User user)
     {
-        return ResponseEntity.ok(userService.registerUser(user));
+        try
+        {
+            return new ResponseEntity<>(userService.registerUser(user),HttpStatus.CREATED);
+
+        }catch (Exception e)
+        {
+            return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping("/login")
-    public User loginUser(@RequestBody User user) throws Exception {
-        String email = user.getEmailId();
-        String password = user.getPassword();
-
-        User user1 = null;
-        if(email!= null && password!= null)
+    public ResponseEntity<User> loginUser(@RequestBody User user) throws Exception {
+        try
         {
-            user1= userService.loginUser(email,password);
-        }
-        if(user1 == null)
+            return new ResponseEntity<>(userService.loginUser(user), HttpStatus.ACCEPTED);
+        }catch (Exception e)
         {
-            throw new Exception("Enter the Correct credentials");
+            return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
         }
-        return user1;
     }
 }

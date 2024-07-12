@@ -1,5 +1,6 @@
 package com.example.colorshop.serviceImpl;
 
+import com.example.colorshop.Exception.ResourceNotFoundException;
 import com.example.colorshop.Repository.ColorRepository;
 import com.example.colorshop.Repository.ColorSelectionRepository;
 import com.example.colorshop.Repository.UserRepository;
@@ -29,11 +30,11 @@ public class ColorSelectionServiceImpl implements ColorSelectionServie {
     public String  selectColors(Integer userId, List<Color> selectedColors) {
 
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
 //        List<Color> colors = colorRepository.findAllById(selectedColors);
         if (selectedColors.size() > 3) {
-            throw new IllegalArgumentException("User can select up to three colors");
+            throw new ResourceNotFoundException("User can select up to three colors");
         }
 
         // Save the selection in the database
@@ -50,16 +51,16 @@ public class ColorSelectionServiceImpl implements ColorSelectionServie {
     @Override
     public String selectColor(Integer userId, Integer colorId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
         Optional<Color> color = colorRepository.findById(colorId);
         if (color.isPresent()) {
             ColorSelection userColorSelection1 = new ColorSelection();
             userColorSelection1.setUser(user);
             userColorSelection1.setColor(color.get());
             colorSelectionRepository.save(userColorSelection1);
-            return "saved";
+            return "Colors are added to the cart successfully";
         }
-        return "not saved";
+        return "Colors are not added to the cart successfully";
     }
 }
 
