@@ -41,7 +41,15 @@ document.addEventListener("DOMContentLoaded", function () {
           password: password
         });
 
-        alert("signup successful");
+        Swal.fire({
+          icon: 'success',
+          title: 'Signup Successful',
+          text: 'Redirecting to Login...',
+          showConfirmButton: false,
+          timer: 2000
+        }).then(() => {
+          window.location.href = "/dashboard.html";
+        });
         console.log('Signed up successfully', response.data);
 
         // Wait for 12 seconds before redirecting
@@ -50,7 +58,13 @@ document.addEventListener("DOMContentLoaded", function () {
         // Redirect to login page or another page after successful signup
         window.location.href = '/login.html';
       } catch (error) {
-
+        Swal.fire({
+          icon: 'error',
+          title: 'Login Failed',
+          text: 'User Already Exists',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'OK'
+        });
         alert("User Already Exists");
         console.error('There was an error signing up!', error);
       }
