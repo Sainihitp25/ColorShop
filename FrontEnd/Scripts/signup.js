@@ -61,11 +61,10 @@ document.addEventListener("DOMContentLoaded", function () {
         Swal.fire({
           icon: 'error',
           title: 'Login Failed',
-          text: 'User Already Exists',
+          text: 'User Already Exists / server error',
           confirmButtonColor: '#3085d6',
           confirmButtonText: 'OK'
         });
-        alert("User Already Exists");
         console.error('There was an error signing up!', error);
       }
     }

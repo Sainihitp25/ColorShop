@@ -36,21 +36,25 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-function completePurchase() {
+async function completePurchase() {
   const selectedColors = JSON.parse(localStorage.getItem("selectedColors"));
   const userId = localStorage.getItem("userId");
 
-  window.location.href = "/confirmation.html";
+  const someColors = []
+
+  console.log(selectedColors);
+  console.log(selectedColors[0]);
+  console.log(selectedColors[1]);
+  console.log(selectedColors[2]);
 
   try {
-    const response = axios.post("http://localhost:9092/user/?", {
-      userId: userId,
-      body: JSON.stringify({ colors: selectedColors }),
+    const response = axios.post(`http://localhost:9092/color-selection/colors/${userId}/`, { 
+      
     });
 
     console.log("Response:", response);
 
-    if (response.status === 200) {
+    if (response.status === 202) {
       window.location.href = "/confirmation.html";
     } else {
       // Handle unexpected status codes
