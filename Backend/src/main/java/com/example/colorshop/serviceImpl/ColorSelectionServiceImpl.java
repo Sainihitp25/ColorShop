@@ -1,6 +1,8 @@
 package com.example.colorshop.serviceImpl;
 
+import com.example.colorshop.Repository.ColorRepository;
 import com.example.colorshop.Repository.ColorSelectionRepository;
+import com.example.colorshop.Repository.UserRepository;
 import com.example.colorshop.entity.Color;
 import com.example.colorshop.entity.ColorSelection;
 import com.example.colorshop.entity.User;
@@ -16,9 +18,19 @@ public class ColorSelectionServiceImpl implements ColorSelectionServie {
     @Autowired
     private ColorSelectionRepository colorSelectionRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private ColorRepository colorRepository;
 
     @Override
-    public void selectedColors(User user, List<Color> selectedColors) {
+    public void selectColors(Integer userId, List<Color> selectedColors) {
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        List<Color> colors = colorRepository.findAllById(selectedColors);
         if (selectedColors.size() != 3) {
             throw new IllegalArgumentException("User must select exactly three colors");
         }
