@@ -20,7 +20,7 @@ public class UserController {
     {
         try
         {
-            return new ResponseEntity<>(userService.registerUser(user),HttpStatus.CREATED);
+            return new ResponseEntity<>(userService.registerUser(user),HttpStatus.OK);
 
         }catch (Exception e)
         {
@@ -32,7 +32,7 @@ public class UserController {
     public ResponseEntity<User> loginUser(@RequestBody User user) throws Exception {
         try
         {
-            return new ResponseEntity<>(userService.loginUser(user), HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(userService.loginUser(user), HttpStatus.OK);
         }catch (Exception e)
         {
             return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
