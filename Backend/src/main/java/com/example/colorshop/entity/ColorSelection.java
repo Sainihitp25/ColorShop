@@ -1,25 +1,26 @@
 package com.example.colorshop.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Getter
 @Setter
 @Data
+@ToString
 public class ColorSelection {
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer colorSelectionId;
 
+    @JoinColumn(name = "userId")
     @ManyToOne
     private User user;
 
+    @JoinColumn(name = "colorId")
     @ManyToOne
     private Color color;
 }

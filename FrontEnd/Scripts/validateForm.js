@@ -85,12 +85,13 @@ function validateForm(event) {
 
   if (isValid) {
     axios
-      .post("http://localhost:8080/signup", {
+      .post("http://localhost:9092/user/register", {
         email: email,
         username: username,
         password: password,
       })
       .then(function (response) {
+        console.log("*register successfully");
         console.log("Signed up successfully", response.data);
         // Redirect to login page or another page after successful signup
       })
