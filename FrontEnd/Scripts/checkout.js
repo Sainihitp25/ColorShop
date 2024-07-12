@@ -40,21 +40,20 @@ async function completePurchase() {
   const selectedColors = JSON.parse(localStorage.getItem("selectedColors"));
   const userId = localStorage.getItem("userId");
 
-  const someColors = []
-
-  console.log(selectedColors);
-  console.log(selectedColors[0]);
-  console.log(selectedColors[1]);
-  console.log(selectedColors[2]);
-
   try {
-    const response = axios.post(`http://localhost:9092/color-selection/colors/${userId}/`, { 
-      
-    });
+    const response = await axios.post(
+      `http://localhost:9092/color-selection/colors-string/${userId}`,
+      selectedColors, // Sending the array directly
+      {
+        headers: {
+          'Content-Type': 'application/json' // Ensure the header is set for JSON
+        }
+      }
+    );
 
     console.log("Response:", response);
 
-    if (response.status === 202) {
+    if (response.status === 200) {
       window.location.href = "/confirmation.html";
     } else {
       // Handle unexpected status codes
