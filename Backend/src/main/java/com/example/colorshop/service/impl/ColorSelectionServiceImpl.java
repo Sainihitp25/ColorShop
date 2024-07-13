@@ -1,4 +1,4 @@
-package com.example.colorshop.serviceImpl;
+package com.example.colorshop.service.impl;
 
 import com.example.colorshop.Exception.ResourceNotFoundException;
 import com.example.colorshop.Repository.ColorRepository;

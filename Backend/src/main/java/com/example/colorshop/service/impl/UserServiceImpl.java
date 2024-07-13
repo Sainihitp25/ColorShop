@@ -1,4 +1,4 @@
-package com.example.colorshop.serviceImpl;
+package com.example.colorshop.service.impl;
 
 import com.example.colorshop.Exception.ResourceNotFoundException;
 import com.example.colorshop.Repository.UserRepository;
@@ -6,7 +6,6 @@ import com.example.colorshop.entity.User;
 import com.example.colorshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Optional;
 
