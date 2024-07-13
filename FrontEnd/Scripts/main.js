@@ -46,6 +46,13 @@ document.addEventListener("DOMContentLoaded", () => {
     selectedColorDiv.dataset.colorName = color.dataset.colorName;
     selectedColorDiv.style.backgroundColor = color.style.backgroundColor;
 
+    if (color.style.backgroundColor === "rgb(255, 255, 255)") {
+      selectedColorDiv.style.color = "#000";
+    } else {
+      selectedColorDiv.style.color = "#fff"; 
+    }
+    
+
     const colorName = document.createElement("span");
     colorName.textContent = color.dataset.colorName;
     selectedColorDiv.appendChild(colorName);
