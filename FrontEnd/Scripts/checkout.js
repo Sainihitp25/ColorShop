@@ -15,15 +15,38 @@ document.addEventListener("DOMContentLoaded", () => {
     userNameElement.textContent = userName;
   }
 
+  const colorMap = {
+    "Lime Green": "#cddc39",
+    "Blue Gray": "#607d8b",
+    "Blue Violet": "#8a2be2",
+    "Cornflower Blue": "#6495ed",
+    "Dark Green": "#006400",
+    "Dark Red": "#8b0000",
+
+  }
+
   if (selectedColors && selectedColors.length > 0) {
     selectedColors.forEach((color) => {
       const colorBox = document.createElement("div");
       colorBox.classList.add("selected-color");
       colorBox.style.backgroundColor = color;
-      colorBox.textContent = color; // Set text content directly to color name
+      colorBox.style.backgroundColor = colorMap[color];
+      colorBox.textContent = color;
 
+      if(color === "Cornflower Blue"){
+        colorBox.style.textAlign = "center"
+      }
+
+      if(color === "White"){
+        colorBox.style.color = "#000";
+      }else{
+        colorBox.style.color = "#fff"; 
+      }
+    
       selectedColorsContainer.appendChild(colorBox);
     });
+
+    
 
     // Show checkout buttons since colors are selected
     document.querySelectorAll(".checkout-button").forEach((btn) => {
