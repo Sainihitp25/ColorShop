@@ -1,13 +1,15 @@
 package com.example.colorshop.service;
 
 import com.example.colorshop.entity.Color;
+import com.example.colorshop.model.CartCTO;
 
 import java.util.List;
 
-public interface ColorSelectionServie {
-    public String selectColors(Integer userId, List<Color> selectedColors);
+public interface ColorSelectionService {
+    String selectColors(Integer userId, List<Color> selectedColors);
 
-    public String selectColors1(Integer userId, List<String> selectedColors1);
+    String selectColors1(Integer userId, List<String> selectedColors1);
 
+    List<CartCTO> orders(Integer userId);
 
 }

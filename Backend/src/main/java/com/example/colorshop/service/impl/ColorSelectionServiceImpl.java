@@ -7,15 +7,17 @@ import com.example.colorshop.Repository.UserRepository;
 import com.example.colorshop.entity.Color;
 import com.example.colorshop.entity.ColorSelection;
 import com.example.colorshop.entity.User;
-import com.example.colorshop.service.ColorSelectionServie;
+import com.example.colorshop.model.CartCTO;
+import com.example.colorshop.service.ColorSelectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ColorSelectionServiceImpl implements ColorSelectionServie {
+public class ColorSelectionServiceImpl implements ColorSelectionService {
 
     @Autowired
     private ColorSelectionRepository colorSelectionRepository;
@@ -39,7 +41,6 @@ public class ColorSelectionServiceImpl implements ColorSelectionServie {
 
         // Save the selection in the database
         for (Color color : selectedColors) {
-            Optional<Color> color1 = colorRepository.findById(color.getColorId());
             ColorSelection userColorSelection = new ColorSelection();
             userColorSelection.setUser(user);
             userColorSelection.setColor(color);
@@ -64,6 +65,25 @@ public class ColorSelectionServiceImpl implements ColorSelectionServie {
             }
         }
         return "Colors added to the cart successfully";
+    }
+
+    @Override
+    public List<CartCTO> orders(Integer userId) {
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        List<ColorSelection> colorSelections = colorSelectionRepository.findByUserId(userId);
+        System.out.println(colorSelections);
+        HashSet<CartCTO> cartCTOS = new HashSet<>();
+        for (ColorSelection colorSelection : colorSelections) {
+            Integer purchasedCount = colorSelectionRepository.countByUserIdAndColorId(colorSelection.getUser().getUserId(), colorSelection.getColor().getColorId());
+            var cto = CartCTO.builder().colorId(colorSelection.getColor().getColorId())
+                    .colorName(colorSelection.getColor().getColorName())
+                    .purchasedCount(purchasedCount).build();
+            cartCTOS.add(cto);
+        }
+
+        return cartCTOS.stream().toList();
     }
 
 
