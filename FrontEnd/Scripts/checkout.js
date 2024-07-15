@@ -22,8 +22,12 @@ document.addEventListener("DOMContentLoaded", () => {
     "Cornflower Blue": "#6495ed",
     "Dark Green": "#006400",
     "Dark Red": "#8b0000",
-
-  }
+    "Olive" : "#808000",
+    "Dark Pink": "#e91e63",
+    "Cool Grey": "#8c92ac",
+    "Saffron": "#f4c431",
+    "Caribbean": "#006d6f"
+  };
 
   if (selectedColors && selectedColors.length > 0) {
     selectedColors.forEach((color) => {
@@ -33,20 +37,18 @@ document.addEventListener("DOMContentLoaded", () => {
       colorBox.style.backgroundColor = colorMap[color];
       colorBox.textContent = color;
 
-      if(color === "Cornflower Blue"){
-        colorBox.style.textAlign = "center"
+      if (color === "Cornflower Blue") {
+        colorBox.style.textAlign = "center";
       }
 
-      if(color === "White"){
+      if (color === "White") {
         colorBox.style.color = "#000";
-      }else{
-        colorBox.style.color = "#fff"; 
+      } else {
+        colorBox.style.color = "#fff";
       }
-    
+
       selectedColorsContainer.appendChild(colorBox);
     });
-
-    
 
     // Show checkout buttons since colors are selected
     document.querySelectorAll(".checkout-button").forEach((btn) => {
@@ -69,8 +71,8 @@ async function completePurchase() {
       selectedColors, // Sending the array directly
       {
         headers: {
-          'Content-Type': 'application/json' // Ensure the header is set for JSON
-        }
+          "Content-Type": "application/json", // Ensure the header is set for JSON
+        },
       }
     );
 

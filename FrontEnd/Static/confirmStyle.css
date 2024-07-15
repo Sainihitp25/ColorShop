@@ -1,5 +1,5 @@
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   background-color: #f4f4f9;
   display: flex;
   justify-content: center;
@@ -45,12 +45,13 @@ header {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .confirmation-container h1 {
-  color: #28a745;
+  color: #00416a;
   margin-bottom: 20px;
 }
 .confirmation-container p {
   margin-bottom: 30px;
 }
+
 .button-group {
   display: flex;
   gap: 10px;
