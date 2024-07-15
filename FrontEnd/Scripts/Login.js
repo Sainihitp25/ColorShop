@@ -41,32 +41,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
           // SweetAlert for successful login
           Swal.fire({
-            icon: 'success',
-            title: 'Login Successful',
-            text: 'Redirecting to dashboard...',
+            icon: "success",
+            title: "Login Successful",
+            text: "Redirecting to dashboard...",
             showConfirmButton: false,
-            timer: 2000
+            timer: 2000,
           }).then(() => {
             window.location.href = "/dashboard.html";
           });
         } else {
           console.log("Unexpected response status:", response.status);
           Swal.fire({
-            icon: 'error',
-            title: 'Login Failed',
-            text: 'Invalid credentials',
-            confirmButtonColor: '#3085d6',
-            confirmButtonText: 'OK'
+            icon: "error",
+            title: "Login Failed",
+            text: "Invalid credentials",
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "OK",
           });
         }
       } catch (error) {
         console.log("Error:", error);
         Swal.fire({
-          icon: 'error',
-          title: 'Login Failed',
-          text: 'Invalid credentials',
-          confirmButtonColor: '#3085d6',
-          confirmButtonText: 'OK'
+          icon: "error",
+          title: "Login Failed",
+          text: "Invalid credentials",
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "OK",
         });
 
         if (error.response) {

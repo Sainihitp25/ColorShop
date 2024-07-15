@@ -17,7 +17,8 @@ button {
 button:hover {
   transform: scale(1.05);
 }
-.google-btn,.facebook-btn{
+.google-btn,
+.facebook-btn {
   background-color: white;
 }
 /* .facebook-btn {
@@ -79,10 +80,11 @@ button:hover {
   align-items: center;
   gap: 20px;
 }
-  
-  .right img, .left img {
-    max-width: 80%; /* adjust the value to your liking */
-  }
+
+.right img,
+.left img {
+  max-width: 80%; /* adjust the value to your liking */
+}
 
 .google-btn {
   border: 1px solid rgba(162, 162, 162, 0.595);
@@ -120,9 +122,9 @@ input {
   color: white;
 }
 .signup-btn {
-    background-color: black;
-    color: white;
-  }
+  background-color: black;
+  color: white;
+}
 .error {
   font-size: 13px;
   color: red;

@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Fetch userId from localStorage
   const userName = localStorage.getItem("userName");
   if (userNameElement) {
-    userNameElement.textContent = userName; 
+    userNameElement.textContent = userName;
   }
 
   // Color selection logic
@@ -49,9 +49,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (color.style.backgroundColor === "rgb(255, 255, 255)") {
       selectedColorDiv.style.color = "#000";
     } else {
-      selectedColorDiv.style.color = "#fff"; 
+      selectedColorDiv.style.color = "#fff";
     }
-    
+
+    const textColor = getContrastingColor(color.style.backgroundColor);
+    selectedColorDiv.style.color = textColor;
 
     const colorName = document.createElement("span");
     colorName.textContent = color.dataset.colorName;
@@ -65,6 +67,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     selectedColorsContainer.appendChild(selectedColorDiv);
+  }
+
+  function getContrastingColor(bgColor) {
+    const rgb = bgColor.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+    const r = parseInt(rgb[1], 10);
+    const g = parseInt(rgb[2], 10);
+    const b = parseInt(rgb[3], 10);
+    const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+    return luminance > 0.5 ? "#000" : "#fff";
   }
 
   function removeFromCart(color) {

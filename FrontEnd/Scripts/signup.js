@@ -35,37 +35,40 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (isValid) {
       try {
-        const response = await axios.post('http://localhost:9092/user/register', {
-          emailId: email,
-          username: username,
-          password: password
-        });
+        const response = await axios.post(
+          "http://localhost:9092/user/register",
+          {
+            emailId: email,
+            username: username,
+            password: password,
+          }
+        );
 
         Swal.fire({
-          icon: 'success',
-          title: 'Signup Successful',
-          text: 'Redirecting to Login...',
+          icon: "success",
+          title: "Signup Successful",
+          text: "Redirecting to Login...",
           showConfirmButton: false,
-          timer: 2000
+          timer: 2000,
         }).then(() => {
           window.location.href = "/dashboard.html";
         });
-        console.log('Signed up successfully', response.data);
+        console.log("Signed up successfully", response.data);
 
         // Wait for 12 seconds before redirecting
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        await new Promise((resolve) => setTimeout(resolve, 2000));
 
         // Redirect to login page or another page after successful signup
-        window.location.href = '/login.html';
+        window.location.href = "/login.html";
       } catch (error) {
         Swal.fire({
-          icon: 'error',
-          title: 'Login Failed',
-          text: 'User Already Exists / server error',
-          confirmButtonColor: '#3085d6',
-          confirmButtonText: 'OK'
+          icon: "error",
+          title: "Login Failed",
+          text: "User Already Exists / server error",
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "OK",
         });
-        console.error('There was an error signing up!', error);
+        console.error("There was an error signing up!", error);
       }
     }
   });
