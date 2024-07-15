@@ -16,8 +16,44 @@ document.addEventListener("DOMContentLoaded", () => {
   // Fetch userId from localStorage
   const userName = localStorage.getItem("userName");
   if (userNameElement) {
-    userNameElement.textContent = userName; 
+    userNameElement.textContent = userName;
   }
+
+  const selectedColors = JSON.parse(localStorage.getItem("selectedColors"));
+
+  if (selectedColors) {
+    for (var i = 0; i < 3; i++) {
+      let backgroundColor = false;
+      colors.forEach(color => {
+        if (color.dataset.colorName === selectedColors[i]) {
+          backgroundColor = color.style.backgroundColor;
+        }
+      });
+      const selectedColorDiv = document.createElement("div");
+      selectedColorDiv.className = "selected-color";
+      selectedColorDiv.dataset.colorName = selectedColors[i].colorName;
+      selectedColorDiv.style.backgroundColor = backgroundColor;
+
+      const colorName = document.createElement("span");
+      colorName.textContent = selectedColors[i]
+      selectedColorDiv.appendChild(colorName);
+
+      if (backgroundColor === "rgb(255, 255, 255)") {
+        selectedColorDiv.style.color = "#000";
+      } else {
+        selectedColorDiv.style.color = "#fff";
+      }
+
+      selectedColorsContainer.appendChild(selectedColorDiv);
+
+      selectedColorDiv.addEventListener("click", function () {
+        selectedColorsContainer.removeChild(selectedColorDiv);
+      });
+      updateCheckoutButton();
+    }
+  }
+
+
 
   // Color selection logic
   colors.forEach((color) => {
@@ -29,7 +65,13 @@ document.addEventListener("DOMContentLoaded", () => {
           updateCartEmptyMessage();
           updateCheckoutButton();
         } else {
-          alert("You can select up to 3 colors only.");
+          // alert("You can select up to 3 colors only.");
+          Swal.fire({
+            icon: 'error',
+            title: 'Select at max 3 colors',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK'
+          });
         }
       } else {
         color.classList.remove("selected");
@@ -49,9 +91,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (color.style.backgroundColor === "rgb(255, 255, 255)") {
       selectedColorDiv.style.color = "#000";
     } else {
-      selectedColorDiv.style.color = "#fff"; 
+      selectedColorDiv.style.color = "#fff";
     }
-    
+
 
     const colorName = document.createElement("span");
     colorName.textContent = color.dataset.colorName;
@@ -59,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     selectedColorDiv.addEventListener("click", function () {
       color.classList.remove("selected");
-      removeFromCart(color);
+      removeFromCart(color.dataset.colorName);
       updateCartEmptyMessage();
       updateCheckoutButton();
     });
@@ -67,11 +109,12 @@ document.addEventListener("DOMContentLoaded", () => {
     selectedColorsContainer.appendChild(selectedColorDiv);
   }
 
-  function removeFromCart(color) {
-    const colorName = color.dataset.colorName;
+  function removeFromCart(colorName) {
+    // console.log(colorName);
     const selectedColorDiv = document.querySelector(
       `.selected-color[data-color-name="${colorName}"]`
     );
+    console.log(selectedColorDiv);
     if (selectedColorDiv) {
       selectedColorsContainer.removeChild(selectedColorDiv);
     }
