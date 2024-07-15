@@ -8,4 +8,6 @@ public interface ColorSelectionServie {
     public String selectColors(Integer userId, List<Color> selectedColors);
 
     public String selectColors1(Integer userId, List<String> selectedColors1);
+
+
 }
