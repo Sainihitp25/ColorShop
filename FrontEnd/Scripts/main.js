@@ -19,7 +19,45 @@ document.addEventListener("DOMContentLoaded", () => {
     userNameElement.textContent = userName;
   }
 
-  // Color selection logic
+  if(localStorage.getItem("selectedColors")){
+    var selectedColors = JSON.parse(localStorage.getItem("selectedColors"));
+    let size = selectedColors.length;
+
+    if (size > 0) {
+      for (var i = 0; i < size; i++) {
+        let backgroundColor = false;
+        colors.forEach((color) => {
+          if (color.dataset.colorName === selectedColors[i]) {
+            backgroundColor = color.style.backgroundColor;
+          }
+        });
+  
+        const selectedColorDiv = document.createElement("div");
+        selectedColorDiv.className = "selected-color";
+        selectedColorDiv.dataset.colorName = selectedColors[i];
+        selectedColorDiv.style.backgroundColor = backgroundColor;
+  
+        const colorName = document.createElement("span");
+        colorName.textContent = selectedColors[i];
+        selectedColorDiv.appendChild(colorName);
+  
+        if (backgroundColor === "rgb(255, 255, 255)") {
+          selectedColorDiv.style.color = "#000";
+        } else {
+          selectedColorDiv.style.color = "#fff";
+        }
+  
+        selectedColorsContainer.appendChild(selectedColorDiv);
+  
+        selectedColorDiv.addEventListener("click", function () {
+          selectedColorsContainer.removeChild(selectedColorDiv);
+        });
+        updateCheckoutButton();
+      }
+    }
+  }
+
+  
   colors.forEach((color) => {
     color.addEventListener("click", function () {
       if (!color.classList.contains("selected")) {
@@ -29,7 +67,13 @@ document.addEventListener("DOMContentLoaded", () => {
           updateCartEmptyMessage();
           updateCheckoutButton();
         } else {
-          alert("You can select up to 3 colors only.");
+          // alert("You can select up to 3 colors only.");
+          Swal.fire({
+            icon: "error",
+            title: "Select at max 3 colors",
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "OK",
+          });
         }
       } else {
         color.classList.remove("selected");
@@ -61,13 +105,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     selectedColorDiv.addEventListener("click", function () {
       color.classList.remove("selected");
-      removeFromCart(color);
+      removeFromCart(color.dataset.colorName);
       updateCartEmptyMessage();
       updateCheckoutButton();
     });
 
     selectedColorsContainer.appendChild(selectedColorDiv);
   }
+
 
   function getContrastingColor(bgColor) {
     const rgb = bgColor.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
@@ -83,6 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const selectedColorDiv = document.querySelector(
       `.selected-color[data-color-name="${colorName}"]`
     );
+    console.log(selectedColorDiv);
     if (selectedColorDiv) {
       selectedColorsContainer.removeChild(selectedColorDiv);
     }

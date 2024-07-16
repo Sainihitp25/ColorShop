@@ -50,20 +50,25 @@ document.addEventListener("DOMContentLoaded", () => {
       selectedColorsContainer.appendChild(colorBox);
     });
 
-    // Show checkout buttons since colors are selected
-    document.querySelectorAll(".checkout-button").forEach((btn) => {
+  
+    document.querySelectorAll(".purchase").forEach((btn) => {
       btn.style.display = "inline-block";
     });
   } else {
     const noColorsMessage = document.createElement("div");
     noColorsMessage.textContent = "No colors selected";
     selectedColorsContainer.appendChild(noColorsMessage);
+
+    console.log(noColorsMessage);
+    console.log(selectedColorsContainer)
   }
 });
 
 async function completePurchase() {
   const selectedColors = JSON.parse(localStorage.getItem("selectedColors"));
   const userId = localStorage.getItem("userId");
+
+  // window.location.href = "/confirmation.html";  use this if backend is not connected
 
   try {
     const response = await axios.post(
