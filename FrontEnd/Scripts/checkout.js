@@ -68,7 +68,7 @@ async function completePurchase() {
   const selectedColors = JSON.parse(localStorage.getItem("selectedColors"));
   const userId = localStorage.getItem("userId");
 
-  // window.location.href = "/confirmation.html";  use this if backend is not connected
+  window.location.href = "/confirmation.html";  // use this if backend is not connected
 
   try {
     const response = await axios.post(
