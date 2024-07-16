@@ -78,7 +78,21 @@ header {
 .selected-color:hover span {
   display: block;
 }
-.checkout-button {
+
+.dashboard{
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: block;
+}
+
+.purchase{
   margin-top: 20px;
   padding: 10px 20px;
   background-color: #4caf50;
