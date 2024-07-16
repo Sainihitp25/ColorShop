@@ -1,6 +1,5 @@
 body {
-  font-family: 'Poppins', sans-serif;
-  background: radial-gradient(#e66465, #9198e5);
+  font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -37,7 +36,9 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20px;
+  border: 30px;
+  padding: 120px;
+  background: radial-gradient(#bebfc5);
 }
 .selected-colors {
   display: flex;
@@ -57,7 +58,9 @@ header {
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 .selected-color span {
   display: none;
@@ -95,7 +98,7 @@ header {
 .purchase{
   margin-top: 20px;
   padding: 10px 20px;
-  background-color: #4caf50;
+  background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 5px;

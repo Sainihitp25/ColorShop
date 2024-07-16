@@ -1,44 +1,58 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="stylesheet" href="Static/signup_login_Style.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+    />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Login</title>
-</head>
-<body>
-<div class="screen">
-    <div class="container">
+  </head>
+  <body>
+    <div class="screen">
+      <div class="container">
         <div class="left">
-            <h1 class="logo">Zaado</h1>
-            <div class="buttons">
-                <button class="google-btn btn"> <img src="./images/google-icon.png" alt="">Sign in with Google</button>
-                <button class="facebook-btn btn"> <img src="./images/Facebook_Logo.png" alt="">Sign in with Facebook</button>
-            </div>
-            <p class="orLogin">or login with email</p>
-            <form id="loginForm" method="post" autocomplete="off">
-                <label for="Email">Email:</label>
-                <input type="email" id="Email" name="Email">
-                <span id="EmailError" class="error"></span>
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password">
-                <span id="passwordError" class="error"></span>
-                <button type="submit" class="btn login-btn">Login</button>
-                <p>Don't have an account? <a class="signup-link" href="/signup.html">Sign Up</a></p>
-            </form>
-            <p class="copyright">&copy; 2024 Zaado. All rights reserved.</p>
+          <h1 class="logo">Zaado</h1>
+          <div class="buttons">
+            <button class="google-btn btn">
+              <img src="./images/google-icon.png" alt="" />Sign in with Google
+            </button>
+            <button class="facebook-btn btn">
+              <img src="./images/Facebook_Logo.png" alt="" />Sign in with
+              Facebook
+            </button>
+          </div>
+          <p class="orLogin">or login with email</p>
+          <form id="loginForm" method="post" autocomplete="off">
+            <label for="Email">Email:</label>
+            <input type="email" id="Email" name="Email" />
+            <span id="EmailError" class="error"></span>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" />
+            <span id="passwordError" class="error"></span>
+            <button type="submit" class="btn login-btn">Login</button>
+            <p>
+              Don't have an account?
+              <a class="signup-link" href="/signup.html">Sign Up</a>
+            </p>
+          </form>
+          <p class="copyright">&copy; 2024 Zaado. All rights reserved.</p>
         </div>
         <div class="right">
-          <img src="/images/Login.jpg" alt="">
+          <img src="/images/Login.jpg" alt="" />
         </div>
+      </div>
     </div>
-</div>
-<script src="/Scripts/Login.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</body>
+    <script src="/Scripts/Login.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </body>
 </html>
