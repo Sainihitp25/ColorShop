@@ -61,6 +61,7 @@ header {
   transition:
     transform 0.2s,
     box-shadow 0.2s;
+  border: 1px solid black;
 }
 .selected-color span {
   display: none;
