@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
         selectedColorDiv.addEventListener("click", function () {
           selectedColorsContainer.removeChild(selectedColorDiv);
         });
+
         updateCheckoutButton();
       }
     }
@@ -77,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       } else {
         color.classList.remove("selected");
-        removeFromCart(color);
+        // removeFromCart(color.dataset.colorName);
         updateCartEmptyMessage();
         updateCheckoutButton();
       }
@@ -123,8 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return luminance > 0.5 ? "#000" : "#fff";
   }
 
-  function removeFromCart(color) {
-    const colorName = color.dataset.colorName;
+  function removeFromCart(colorName) {
     const selectedColorDiv = document.querySelector(
       `.selected-color[data-color-name="${colorName}"]`
     );
